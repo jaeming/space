@@ -1,10 +1,6 @@
-module Home = {
-  open React
+open React
 
-  @react.component
-  let make = () => {   
-    <div>
-      {string("HOME")}
-    </div>
-  }
+@react.component
+let make = () => {
+  <div> {string("HOME")} </div>
 }

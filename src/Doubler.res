@@ -1,12 +1,6 @@
-module Doubler = {
-  open React
-  open State
-  
-  @react.component
-  let make = (~dispatch) => {   
-    <div>
-      <button onClick={(_) => dispatch(State.Double)}> {string("double")} </button>
-    </div>
-  }
-}
+open React
 
+@react.component
+let make = (~double) => {
+  <div> <button onClick=double> {string("double")} </button> </div>
+}

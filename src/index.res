@@ -1,10 +1,5 @@
 module App = {
   open React
-  open Doubler
-  open Posts
-  open Home
-  open PageNotFound
-
   open State
 
   @react.component
@@ -17,14 +12,17 @@ module App = {
     | _ => <PageNotFound />
     }
 
-    let (state, dispatch) = useReducer(State.reducer, {count: 0})
+    let (state, dispatch) = useReducer(reducer, {count: 0})
+    let increment = _ => dispatch(Increment)
+    let decrement = _ => dispatch(Decrement)
+    let double = _ => dispatch(Double)
 
     <div>
       {component}
       <p> {int(state.count)} </p>
-      <button onClick={_ => dispatch(Increment)}> {string("Increment")} </button>
-      <button onClick={_ => dispatch(Decrement)}> {string("Decrement")} </button>
-      <Doubler dispatch />
+      <button onClick=increment> {string("Increment")} </button>
+      <button onClick=decrement> {string("Decrement")} </button>
+      <Doubler double />
     </div>
   }
 }
