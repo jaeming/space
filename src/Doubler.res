@@ -1,11 +1,11 @@
 module Doubler = {
   open React
+  open State
+  
   @react.component
-  let make = (~setCount) => {
-    let double = _ => {setCount(prev => prev + prev)}
-    
+  let make = (~dispatch) => {   
     <div>
-      <button onClick=double> {string("double")} </button>
+      <button onClick={(_) => dispatch(State.Double)}> {string("double")} </button>
     </div>
   }
 }

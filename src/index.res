@@ -5,31 +5,31 @@ module App = {
   open Home
   open PageNotFound
 
+  open State
+
   @react.component
   let make = () => {
     let url = RescriptReactRouter.useUrl()
-    let (count, setCount) = useState(_ => 0)
-    let increment = _ => {setCount(prev => prev + 1)}
-    let decrement = _ => {setCount(prev => prev - 1)}
-
 
     let component = switch url.path {
-      | list{"posts"} => <Posts />
-      | list{} => <Home />
-      | _ => <PageNotFound />
+    | list{"posts"} => <Posts />
+    | list{} => <Home />
+    | _ => <PageNotFound />
     }
-    
+
+    let (state, dispatch) = useReducer(State.reducer, {count: 0})
+
     <div>
       {component}
-      <p> {int(count)} </p>
-      <button onClick=increment> {string("Increment")} </button>
-      <button onClick=decrement> {string("Decrement")} </button>
-      <Doubler setCount />
+      <p> {int(state.count)} </p>
+      <button onClick={_ => dispatch(Increment)}> {string("Increment")} </button>
+      <button onClick={_ => dispatch(Decrement)}> {string("Decrement")} </button>
+      <Doubler dispatch />
     </div>
   }
 }
 
 switch ReactDOM.querySelector("#app") {
-  | Some(root) => ReactDOM.render(<App />, root)
-  | None => ()
+| Some(root) => ReactDOM.render(<App />, root)
+| None => ()
 }
