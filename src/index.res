@@ -1,4 +1,4 @@
-module Counter = {
+module App = {
   open React
   open Doubler
   open Posts
@@ -29,7 +29,7 @@ module Counter = {
   }
 }
 
-switch ReactDOM.querySelector("#app-root") {
-  | Some(root) => ReactDOM.render(<Counter />, root)
+switch ReactDOM.querySelector("#app") {
+  | Some(root) => ReactDOM.render(<App />, root)
   | None => ()
 }
